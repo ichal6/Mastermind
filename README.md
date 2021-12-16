@@ -23,3 +23,8 @@
 7. Wciśnięcie przycisku „Oszust” przy poprawnych zasadach gry - oczekiwana informacja „tere fere”. 
 8. Wciśnięcie przycisku „Oszust” przy niepoprawnych zasadach gry - oczekiwana informacja o oszukiwaniu przez komputer. 
 9. Wpisanie 10 kodów, resetowanie gry, wpisanie 5 kodów - oczekiwane normalne działanie gry (czy licznik tur resetuje się po wciśnięciu „Reset”). 
+
+Aby uruchomić testy:
+```shell
+python -m unittest discover
+```
