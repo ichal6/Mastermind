@@ -12,3 +12,14 @@ class MainTest(unittest.TestCase):
         secret_code = SecretCode(given_code)
         # then
         self.assertEqual(secret_code.secret_code, given_code)
+
+    def test_2_should_create_with_random_secret_code(self):
+        # given
+        size_of_code = 4
+
+        # when
+        secret_code = SecretCode()
+
+        # then
+        self.assertIsNotNone(secret_code.secret_code)
+        self.assertEqual(len(secret_code.secret_code), size_of_code)
