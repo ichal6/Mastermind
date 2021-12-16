@@ -11,8 +11,8 @@ class SecretCode:
     def secret_code(self):
         return self.__secret_code
 
-    def __eq__(self, other):
-        pass
-
-    def __ne__(self, other):
-        pass
+    def equal_code(self, other: dict):
+        if self.__secret_code == other:
+            return True
+        else:
+            return False
