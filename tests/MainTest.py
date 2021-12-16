@@ -27,7 +27,7 @@ class MainTest(unittest.TestCase):
         wrong_code = generate_wrong_answer(secret_code.secret_code)
         game = FairGame(secret_code)
         # when
-        is_win = game.check(wrong_code)
+        is_win = secret_code == wrong_code
         # then
         print("Secret code: ", end="")
         print_secret_code(secret_code.secret_code)
