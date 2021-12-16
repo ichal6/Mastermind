@@ -1,7 +1,7 @@
 import random
 
 
-def generate_wrong_answer(secret_code: dict) -> bool:
+def generate_wrong_answer(secret_code: dict) -> dict:
     answer = dict()
 
     for item in secret_code.items():
