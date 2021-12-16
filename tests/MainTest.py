@@ -1,23 +1,7 @@
 import unittest
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
-
-
-def print_secret_code(secret_code: dict):
-    for digit in secret_code.values():
-        print(digit, end="")
-
-
-def generate_wrong_answer(secret_code: dict):
-    answer = dict()
-
-    for item in secret_code.items():
-        if item[1] != 6:
-            answer[item[0]] = item[1] + 1
-        else:
-            answer[item[0]] = item[1] - 1
-
-    return answer
+from tests.CommonUse import generate_wrong_answer, print_secret_code
 
 
 class MainTest(unittest.TestCase):
@@ -27,7 +11,8 @@ class MainTest(unittest.TestCase):
         wrong_code = generate_wrong_answer(secret_code.secret_code)
         game = FairGame(secret_code)
         # when
-        is_win = secret_code.equal_code(wrong_code)
+        is_the_same = secret_code.equal_code(wrong_code)
+        is_win = game.check(SecretCode(wrong_code))
         # then
         print("Secret code: ", end="")
         print_secret_code(secret_code.secret_code)
@@ -35,4 +20,5 @@ class MainTest(unittest.TestCase):
         print_secret_code(wrong_code)
         print("", end="", flush=True)
 
+        self.assertIs(is_the_same, False)
         self.assertIs(is_win, False)
