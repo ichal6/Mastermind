@@ -10,3 +10,9 @@ class SecretCode:
     @property
     def secret_code(self):
         return self.__secret_code
+
+    def __eq__(self, other):
+        pass
+
+    def __ne__(self, other):
+        pass
