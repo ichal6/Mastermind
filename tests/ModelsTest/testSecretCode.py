@@ -23,3 +23,7 @@ class MainTest(unittest.TestCase):
         # then
         self.assertIsNotNone(secret_code.secret_code)
         self.assertEqual(len(secret_code.secret_code), size_of_code)
+
+
+if __name__ == '__main__':
+    unittest.main()
