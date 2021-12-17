@@ -29,3 +29,12 @@ class TestFairGame(TestCase):
         is_the_same = self.__fair_game.check(wrong_code)
         # then
         self.assertIs(is_the_same, False)
+
+    def test_3_should_return_info_about_nothing_guess(self):
+        # given
+        wrong_code = SecretCode(generate_wrong_answer(self.__secret_code.secret_code))
+        exg_answer = f'Liczba: {wrong_code}\nCyfr poprawnych: 0\nCyfr na niepoprawnych pozycjach: x'
+        # when
+        msg = self.__fair_game.attempt(wrong_code)
+        # then
+        self.assertEqual(msg, exg_answer)

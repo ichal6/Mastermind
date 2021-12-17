@@ -22,6 +22,7 @@ class MainTest(unittest.TestCase):
 
         self.assertIs(is_the_same, False)
         self.assertIs(is_win, False)
+        #self.assertEqual(return_msg, error_msg)
 
 
 if __name__ == '__main__':
