@@ -7,5 +7,5 @@ class FairGame(RegulyGry):
         super().__init__(secret_code)
 
     def check(self, possible_code: SecretCode) -> bool:
-        if not self._secret_code.equal_code(possible_code.secret_code):
-            return False
+        return self._secret_code.equal_code(possible_code.secret_code) if True else False
+
