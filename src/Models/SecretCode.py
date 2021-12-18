@@ -18,15 +18,15 @@ class SecretCode:
     def secret_code(self):
         return self.__secret_code
 
-    def equal_code(self, other: dict):
-        if self.__secret_code == other:
+    def equal_code(self, other):
+        if self.__secret_code == other.secret_code:
             return True
         else:
             return False
 
-    def count_correct_position(self, other: dict):
+    def count_correct_position(self, other):
         count = 0
-        for key, value in other.items():
+        for key, value in other.secret_code.items():
             if self.__secret_code[key] == value:
                 count += 1
         return count

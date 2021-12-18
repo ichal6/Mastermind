@@ -8,11 +8,13 @@ class MainTest(unittest.TestCase):
     def test_1_should_display_secret_code_and_return_error_message_if_insert_wrong_code(self):
         # given
         secret_code = SecretCode()
-        wrong_code = generate_wrong_answer(secret_code.secret_code)
+        wrong_code_dict = generate_wrong_answer(secret_code.secret_code)
+        wrong_code = SecretCode(wrong_code_dict)
         game = FairGame(secret_code)
         # when
         is_the_same = secret_code.equal_code(wrong_code)
-        is_win = game.check(SecretCode(wrong_code))
+        is_win = game.check(wrong_code)
+        number_of_correct_position = game.get_count_correct_position(wrong_code)
         # then
         print("Secret code: ", end="")
         print_secret_code(secret_code.secret_code)

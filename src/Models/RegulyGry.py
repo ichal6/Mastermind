@@ -13,7 +13,7 @@ class RegulyGry(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def attempt(self, possible_code) -> str:
+    def get_count_correct_position(self, possible_code) -> str:
         raise NotImplementedError
 
     def increase_attempt_number(self):
