@@ -35,6 +35,8 @@ class SecretCode:
         count = 0
         values = list(self.__secret_code.values())
         for key, value in other.secret_code.items():
+            if self.__secret_code[key] == value:
+                continue
             if self.__secret_code[key] in values:
                 count += 1
         return count
