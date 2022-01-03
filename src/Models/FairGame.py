@@ -1,8 +1,8 @@
-from src.Models.RegulyGry import RegulyGry
+from src.Models.RuleGame import GameRule
 from src.Models.SecretCode import SecretCode
 
 
-class FairGame(RegulyGry):
+class FairGame(GameRule):
     def __init__(self, secret_code):
         super().__init__(secret_code)
 

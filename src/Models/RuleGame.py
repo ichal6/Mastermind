@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from src.Models.SecretCode import SecretCode
 
 
-class RegulyGry(ABC):
+class GameRule(ABC):
     def __init__(self, secret_code: SecretCode):
         self._secret_code = secret_code
         self.__attempt_number = 0

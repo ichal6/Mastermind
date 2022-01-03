@@ -1,10 +1,10 @@
-from src.Models.RegulyGry import RegulyGry
+from src.Models.RuleGame import GameRule
 from src.Models.SecretCode import SecretCode
 from src.Views.View import View
 
 
 class ControllerGame:
-    def __init__(self, game_rule: RegulyGry, view: View):
+    def __init__(self, game_rule: GameRule, view: View):
         self.__game = game_rule
         self.__view = view
 
