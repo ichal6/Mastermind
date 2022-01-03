@@ -50,6 +50,27 @@ class MainTest(unittest.TestCase):
 
         self.assertEqual(4, number_of_incorrect_position)
 
+    def test_3_should_return_two_hit_and_two_mishit(self):
+        # given
+        secret_code = SecretCode({0: 5, 1: 4, 2: 3, 3: 4})
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+
+        half_correct_code = SecretCode({0: 5, 1: 3, 2: 4, 3: 4})
+        # when
+        number_of_incorrect_position = game.get_count_incorrect_position(half_correct_code)
+        number_of_correct_position = game.get_count_correct_position(half_correct_code)
+
+        # then
+        print("\nWylosowany secret code: ", end="")
+        print_secret_code(secret_code.secret_code)
+        print("", flush=True)
+        controller.check(half_correct_code)
+
+        self.assertEqual(2, number_of_incorrect_position)
+        self.assertEqual(2, number_of_correct_position)
+
 
 if __name__ == '__main__':
     unittest.main()
