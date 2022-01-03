@@ -10,4 +10,5 @@ class ControllerGame:
 
     def check(self, possible_code: SecretCode):
         count_correct_positions = self.__game.get_count_correct_position(possible_code)
-        self.__view.answer(possible_code, count_correct_positions, 0)
+        count_incorrect_positions = self.__game.get_count_incorrect_position(possible_code)
+        self.__view.answer(possible_code, count_correct_positions, count_incorrect_positions)

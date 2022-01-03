@@ -1,5 +1,7 @@
 import random
 
+SIZE_OF_SECRET_CODE = 4
+
 
 def generate_wrong_answer(secret_code: dict) -> dict:
     answer = dict()
@@ -10,6 +12,16 @@ def generate_wrong_answer(secret_code: dict) -> dict:
         else:
             answer[item[0]] = item[1] - 1
 
+    return answer
+
+
+def mixed_up_answer(secret_code: dict) -> dict:
+    answer = dict()
+    index = 0
+    while index < SIZE_OF_SECRET_CODE - 1:
+        answer[index] = secret_code[index + 1]
+        index += 1
+    answer[SIZE_OF_SECRET_CODE - 1] = secret_code[0]
     return answer
 
 

@@ -30,3 +30,11 @@ class SecretCode:
             if self.__secret_code[key] == value:
                 count += 1
         return count
+
+    def count_incorrect_position(self, other):
+        count = 0
+        values = list(self.__secret_code.values())
+        for key, value in other.secret_code.items():
+            if self.__secret_code[key] in values:
+                count += 1
+        return count

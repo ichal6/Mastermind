@@ -11,3 +11,6 @@ class FairGame(GameRule):
 
     def get_count_correct_position(self, possible_code: SecretCode) -> int:
         return self._secret_code.count_correct_position(possible_code)
+
+    def get_count_incorrect_position(self, possible_code: SecretCode) -> int:
+        return self._secret_code.count_incorrect_position(possible_code)

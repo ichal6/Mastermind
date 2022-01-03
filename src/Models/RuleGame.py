@@ -13,8 +13,11 @@ class GameRule(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_count_correct_position(self, possible_code) -> str:
+    def get_count_correct_position(self, possible_code) -> int:
         raise NotImplementedError
 
     def increase_attempt_number(self):
         self.__attempt_number += 1
+
+    def get_count_incorrect_position(self, possible_code) -> int:
+        raise NotImplementedError
