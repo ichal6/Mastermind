@@ -1,4 +1,4 @@
-from src.Models.RegulyGry import RegulyGry
+from src.Models.RuleGame import RegulyGry
 from src.Models.SecretCode import SecretCode
 from src.Views.View import View
 

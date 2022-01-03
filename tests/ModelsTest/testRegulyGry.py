@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.Models.RegulyGry import RegulyGry
+from src.Models.RuleGame import RegulyGry
 from src.Models.SecretCode import SecretCode
 from tests.CommonUse import generate_secret_code, generate_wrong_answer
 
