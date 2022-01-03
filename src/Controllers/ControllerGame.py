@@ -15,3 +15,5 @@ class ControllerGame:
         self.__view.answer(possible_code, count_correct_positions, count_incorrect_positions)
         if is_win:
             self.__view.win()
+        if self.__game.attempt_number > self.__game.max_attempt():
+            self.__view.game_over()

@@ -7,6 +7,7 @@ class FairGame(GameRule):
         super().__init__(secret_code)
 
     def check(self, possible_code: SecretCode) -> bool:
+        self.increase_attempt_number()
         return self._secret_code.equal_code(possible_code) if True else False
 
     def get_count_correct_position(self, possible_code: SecretCode) -> int:
