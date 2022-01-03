@@ -71,6 +71,30 @@ class MainTest(unittest.TestCase):
         self.assertEqual(2, number_of_incorrect_position)
         self.assertEqual(2, number_of_correct_position)
 
+    def test_4_should_win_when_insert_correct_code(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+
+        hit_correct_code = SecretCode(secret_code_dict)
+        # when
+        number_of_incorrect_position = game.get_count_incorrect_position(hit_correct_code)
+        number_of_correct_position = game.get_count_correct_position(hit_correct_code)
+        is_win = game.check(hit_correct_code)
+
+        # then
+        print("\nWylosowany secret code: ", end="")
+        print_secret_code(secret_code.secret_code)
+        print("", flush=True)
+        controller.check(hit_correct_code)
+
+        self.assertEqual(0, number_of_incorrect_position)
+        self.assertEqual(4, number_of_correct_position)
+        self.assertIs(is_win, True)
+
 
 if __name__ == '__main__':
     unittest.main()
