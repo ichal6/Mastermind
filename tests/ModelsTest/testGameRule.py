@@ -4,7 +4,7 @@ from src.Models.SecretCode import SecretCode
 from tests.CommonUse import generate_secret_code, generate_wrong_answer
 
 
-class TestRegulyGry(TestCase):
+class TestGameRule(TestCase):
     __secret_code = None
 
     @classmethod
