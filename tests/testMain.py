@@ -4,7 +4,7 @@ from src.Controllers.ControllerGame import ControllerGame
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.ConsoleView import ConsoleView
-from tests.CommonUse import generate_wrong_answer, print_secret_code, mixed_up_answer
+from tests.CommonUse import generate_wrong_answer, print_secret_code, mixed_up_answer, generate_secret_code
 
 
 class MainTest(unittest.TestCase):
@@ -94,6 +94,28 @@ class MainTest(unittest.TestCase):
         self.assertEqual(0, number_of_incorrect_position)
         self.assertEqual(4, number_of_correct_position)
         self.assertIs(is_win, True)
+
+    def test_5_should_display_game_over_message_after_12_attempts(self):
+        # given
+        secret_code_dict = generate_secret_code()
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+
+        wrong_code = SecretCode(generate_wrong_answer(secret_code_dict))
+        # when
+        is_win = game.check(wrong_code)
+
+        # then
+        print("\nWylosowany secret code: ", end="")
+        print_secret_code(secret_code.secret_code)
+        print("", flush=True)
+        for count in range(1, 13):
+            print('\nPróba numer: ', count)
+            controller.check(wrong_code)
+
+        self.assertIs(is_win, False)
 
 
 if __name__ == '__main__':

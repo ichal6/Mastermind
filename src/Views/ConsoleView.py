@@ -13,3 +13,6 @@ class ConsoleView(View):
 
     def win(self):
         print('Moje gratulacje! Wygrałeś!')
+
+    def game_over(self):
+        print('Niestety nie udało się. Może następnym razem?')

@@ -12,3 +12,7 @@ class View(ABC):
     @abstractmethod
     def win(self):
         raise NotImplementedError
+
+    @abstractmethod
+    def game_over(self):
+        raise NotImplementedError
