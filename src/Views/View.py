@@ -19,3 +19,7 @@ class View(ABC):
     @abstractmethod
     def game_over(self):
         raise NotImplementedError
+
+    @abstractmethod
+    def check_button_clicked(self):
+        raise NotImplementedError
