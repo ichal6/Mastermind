@@ -117,6 +117,24 @@ class MainTest(unittest.TestCase):
 
         self.assertIs(is_win, False)
 
+    def test_6_should_disregard_code_if_format_is_incorrect(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+
+        hit_correct_code = SecretCode({'1': 8, 1: 'a', 2: 0})
+        # when
+        is_win = game.check(hit_correct_code)
+
+        # then
+        print("\nWylosowany secret code: ", end="")
+        print_secret_code(secret_code.secret_code)
+        print("", flush=True)
+        controller.check(hit_correct_code)
+
 
 if __name__ == '__main__':
     unittest.main()
