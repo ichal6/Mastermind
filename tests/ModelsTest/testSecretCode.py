@@ -26,10 +26,10 @@ class MainTest(unittest.TestCase):
 
     def setUp(self) -> None:
         self.given_code = {
-            1: 6,
-            2: 5,
-            3: 4,
-            4: 3
+            0: 6,
+            1: 5,
+            2: 4,
+            3: 3
         }
         self.code_as_string = '6543'
         self.secret_code = SecretCode(self.given_code)
