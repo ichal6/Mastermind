@@ -1,6 +1,7 @@
 import unittest
 
 from src.Controllers.ControllerGame import ControllerGame
+from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.ConsoleView import ConsoleView
@@ -124,16 +125,23 @@ class MainTest(unittest.TestCase):
         game = FairGame(secret_code)
         view = ConsoleView()
         controller = ControllerGame(game, view)
+        view.set_controller(controller)
 
-        hit_correct_code = SecretCode({0: '6', 1: 2, 2: 4, 3: 4})
         # when
-        is_win = game.check(hit_correct_code)
-
+        view.check_button_clicked("1234")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("asds")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("0892")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("-1234")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("12")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("123456")
+        view.check_button_clicked("1234")
         # then
-        print("\nWylosowany secret code: ", end="")
-        print_secret_code(secret_code.secret_code)
-        print("", flush=True)
-        controller.check(hit_correct_code)
+        self.assertEqual(2, game.attempt_number)
 
 
 if __name__ == '__main__':
