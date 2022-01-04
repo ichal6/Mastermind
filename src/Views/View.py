@@ -3,7 +3,10 @@ from abc import ABC, abstractmethod
 
 class View(ABC):
     def __init__(self):
-        pass
+        self.controller = None
+
+    def set_controller(self, controller):
+        self.controller = controller
 
     @abstractmethod
     def answer(self, provide_code, count_correct_number, count_incorrect_position):
@@ -15,4 +18,8 @@ class View(ABC):
 
     @abstractmethod
     def game_over(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def check_button_clicked(self):
         raise NotImplementedError

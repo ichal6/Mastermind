@@ -1,6 +1,7 @@
 import unittest
 
 from src.Controllers.ControllerGame import ControllerGame
+from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.ConsoleView import ConsoleView
@@ -116,6 +117,31 @@ class MainTest(unittest.TestCase):
             controller.check(wrong_code)
 
         self.assertIs(is_win, False)
+
+    def test_6_should_disregard_code_if_format_is_incorrect(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+        view.set_controller(controller)
+
+        # when
+        view.check_button_clicked("1234")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("asds")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("0892")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("-1234")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("12")
+        with self.assertRaises(IncorrectSecretCodeError):
+            view.check_button_clicked("123456")
+        view.check_button_clicked("1234")
+        # then
+        self.assertEqual(2, game.attempt_number)
 
 
 if __name__ == '__main__':

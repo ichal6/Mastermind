@@ -1,5 +1,7 @@
 import random
 
+from src.Validations.DataValidation import DataValidation
+
 
 class SecretCode:
     def __init__(self, secret_code: dict = None):
@@ -7,6 +9,8 @@ class SecretCode:
         if secret_code is None:
             for number in range(0, 4):
                 self.__secret_code[number] = random.randint(1, 6)
+        else:
+            DataValidation.validate_secret_code_dict(secret_code)
 
     def __str__(self):
         digits = ''

@@ -1,5 +1,7 @@
+from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.RuleGame import GameRule
 from src.Models.SecretCode import SecretCode
+from src.Services.GameService import GameService
 from src.Views.View import View
 
 
@@ -17,3 +19,7 @@ class ControllerGame:
             self.__view.win()
         if self.__game.attempt_number > self.__game.max_attempt():
             self.__view.game_over()
+
+    def check_from_string(self, secret_code_raw: str):
+        possible_secret_code = GameService.build_secret_code(secret_code_raw)
+        self.check(possible_secret_code)
