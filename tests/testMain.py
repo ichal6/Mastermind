@@ -125,7 +125,7 @@ class MainTest(unittest.TestCase):
         view = ConsoleView()
         controller = ControllerGame(game, view)
 
-        hit_correct_code = SecretCode({'1': 8, 1: 'a', 2: 0})
+        hit_correct_code = SecretCode({0: '6', 1: 2, 2: 4, 3: 4})
         # when
         is_win = game.check(hit_correct_code)
 
