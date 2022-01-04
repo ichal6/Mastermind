@@ -9,6 +9,8 @@ class DataValidation:
     @staticmethod
     def validate_secret_code_dict(possible_secret_code: dict):
         """
+        Check structure of secret code
+
         Parameters
         ----------
         possible_secret_code : dict
