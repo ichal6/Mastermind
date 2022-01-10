@@ -27,7 +27,7 @@ class ConsoleView(View):
         print('Zrestartowano grę')
 
     def show_error(self, message):
-        print("Nieprawidłowy kod: " + message)
+        print("Nieprawidłowy kod: " + str(message))
 
     @staticmethod
     def _View__fair_game_message(secret_code: str):

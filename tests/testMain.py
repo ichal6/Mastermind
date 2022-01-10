@@ -131,16 +131,11 @@ class MainTest(unittest.TestCase):
 
         # when
         view.check_button_clicked("1234")
-        with self.assertRaises(IncorrectSecretCodeError):
-            view.check_button_clicked("asds")
-        with self.assertRaises(IncorrectSecretCodeError):
-            view.check_button_clicked("0892")
-        with self.assertRaises(IncorrectSecretCodeError):
-            view.check_button_clicked("-1234")
-        with self.assertRaises(IncorrectSecretCodeError):
-            view.check_button_clicked("12")
-        with self.assertRaises(IncorrectSecretCodeError):
-            view.check_button_clicked("123456")
+        view.check_button_clicked("asds")
+        view.check_button_clicked("0892")
+        view.check_button_clicked("-1234")
+        view.check_button_clicked("12")
+        view.check_button_clicked("123456")
         view.check_button_clicked("1234")
         # then
         self.assertEqual(2, game.attempt_number)
