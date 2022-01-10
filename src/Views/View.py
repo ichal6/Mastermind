@@ -8,6 +8,15 @@ class View(ABC):
     def set_controller(self, controller):
         self.controller = controller
 
+    def is_cheater(self):
+        is_cheater = self.controller.is_cheater()
+        secret_code_as_str = self.controller.display_code()
+
+        if is_cheater:
+            pass
+        else:
+            self.__fair_game_message(secret_code_as_str)
+
     @abstractmethod
     def answer(self, provide_code, count_correct_number, count_incorrect_position):
         raise NotImplementedError
@@ -22,4 +31,9 @@ class View(ABC):
 
     @abstractmethod
     def check_button_clicked(self):
+        raise NotImplementedError
+
+    @staticmethod
+    @abstractmethod
+    def __fair_game_message(secret_code: str):
         raise NotImplementedError

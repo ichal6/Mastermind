@@ -1,4 +1,4 @@
-from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
+from src.Models.CheatGame import CheatGame
 from src.Models.RuleGame import GameRule
 from src.Models.SecretCode import SecretCode
 from src.Services.GameService import GameService
@@ -23,3 +23,9 @@ class ControllerGame:
     def check_from_string(self, secret_code_raw: str):
         possible_secret_code = GameService.build_secret_code(secret_code_raw)
         self.check(possible_secret_code)
+
+    def is_cheater(self):
+        return isinstance(self.__game, CheatGame)
+
+    def display_code(self) -> str:
+        return self.__game.get_code_value()
