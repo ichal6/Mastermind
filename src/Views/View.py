@@ -13,7 +13,7 @@ class View(ABC):
         secret_code_as_str = self.controller.display_code()
 
         if is_cheater:
-            pass
+            self.__cheat_game_message()
         else:
             self.__fair_game_message(secret_code_as_str)
 
@@ -36,4 +36,9 @@ class View(ABC):
     @staticmethod
     @abstractmethod
     def __fair_game_message(secret_code: str):
+        raise NotImplementedError
+
+    @staticmethod
+    @abstractmethod
+    def __cheat_game_message():
         raise NotImplementedError

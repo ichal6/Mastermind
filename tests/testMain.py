@@ -2,6 +2,7 @@ import unittest
 
 from src.Controllers.ControllerGame import ControllerGame
 from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
+from src.Models.CheatGame import CheatGame
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.ConsoleView import ConsoleView
@@ -148,6 +149,19 @@ class MainTest(unittest.TestCase):
         secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
         secret_code = SecretCode(secret_code_dict)
         game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+        view.set_controller(controller)
+
+        # when
+        # then
+        view.is_cheater()
+
+    def test_8_should_display_info_about_cheat_if_rule_is_cheat(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = CheatGame(secret_code)
         view = ConsoleView()
         controller = ControllerGame(game, view)
         view.set_controller(controller)
