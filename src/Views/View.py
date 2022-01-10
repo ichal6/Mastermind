@@ -14,9 +14,11 @@ class View(ABC):
 
         if is_cheater:
             self.__cheat_game_message()
+            self.reset()
             return True
         else:
             self.__fair_game_message(secret_code_as_str)
+            self.reset()
             return False
 
     @abstractmethod
