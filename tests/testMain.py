@@ -6,7 +6,8 @@ from src.Models.CheatGame import CheatGame
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.ConsoleView import ConsoleView
-from tests.CommonUse import generate_wrong_answer, print_secret_code, mixed_up_answer, generate_secret_code
+from tests.CommonUse import generate_wrong_answer, print_secret_code, mixed_up_answer, generate_secret_code, \
+    convert_dict_secret_code_to_string
 
 
 class MainTest(unittest.TestCase):
@@ -169,6 +170,26 @@ class MainTest(unittest.TestCase):
         # when
         # then
         view.is_cheater()
+
+    def test_9_should_can_reset_the_game(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = CheatGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+        view.set_controller(controller)
+
+        # when
+        for _ in range(10):
+            view.check_button_clicked("1234")
+        view.reset()
+        wrong_answer = generate_wrong_answer(controller._ControllerGame__game._secret_code.secret_code)
+        wrong_answer_dict = convert_dict_secret_code_to_string(wrong_answer)
+        for _ in range(5):
+            view.check_button_clicked(wrong_answer_dict)
+        # then
+        self.assertEqual(5, controller._ControllerGame__game.attempt_number)
 
 
 if __name__ == '__main__':

@@ -29,3 +29,6 @@ class ControllerGame:
 
     def display_code(self) -> str:
         return self.__game.get_code_value()
+
+    def reset(self):
+        self.__game = GameService.build_game_rule()

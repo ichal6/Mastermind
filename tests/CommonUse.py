@@ -35,3 +35,10 @@ def generate_secret_code() -> dict:
 def print_secret_code(secret_code: dict) -> None:
     for digit in secret_code.values():
         print(digit, end="")
+
+
+def convert_dict_secret_code_to_string(secret_code: dict) -> str:
+    digits = ''
+    for digit in secret_code.values():
+        digits += f'{digit}'
+    return digits

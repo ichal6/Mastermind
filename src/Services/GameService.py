@@ -1,4 +1,7 @@
+import random
+
 from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
+from src.Models import RuleGame, FairGame, CheatGame
 from src.Models.SecretCode import SecretCode
 
 
@@ -54,3 +57,18 @@ class GameService:
             raise IncorrectSecretCodeError("Not an integer number in code")
 
         return SecretCode(code_dict)
+
+    @staticmethod
+    def build_game_rule() -> RuleGame:
+        """
+        Generate and build derived class from RuleGame
+
+        Returns
+        -----------
+        Subclass of GameRule
+        """
+        secret_code = SecretCode()
+        game_rule = random.sample({CheatGame.CheatGame, FairGame.FairGame}, 1)[0]
+        game = game_rule(secret_code)
+
+        return game

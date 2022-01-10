@@ -33,6 +33,10 @@ class View(ABC):
     def check_button_clicked(self):
         raise NotImplementedError
 
+    @abstractmethod
+    def reset(self):
+        raise NotImplementedError
+
     @staticmethod
     @abstractmethod
     def __fair_game_message(secret_code: str):
