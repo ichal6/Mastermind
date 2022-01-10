@@ -39,6 +39,15 @@ class View(ABC):
     def reset(self):
         raise NotImplementedError
 
+    @abstractmethod
+    def show_error(self, message):
+        """
+        Show an error message
+        :param message:
+        :return:
+        """
+        raise NotImplementedError
+
     @staticmethod
     @abstractmethod
     def __fair_game_message(secret_code: str):
