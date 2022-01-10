@@ -14,8 +14,10 @@ class View(ABC):
 
         if is_cheater:
             self.__cheat_game_message()
+            return True
         else:
             self.__fair_game_message(secret_code_as_str)
+            return False
 
     @abstractmethod
     def answer(self, provide_code, count_correct_number, count_incorrect_position):
