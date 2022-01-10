@@ -25,3 +25,7 @@ class ConsoleView(View):
     @staticmethod
     def _View__fair_game_message(secret_code: str):
         print('Tere fere. Wylosowany kod: ' + secret_code)
+
+    @staticmethod
+    def _View__cheat_game_message():
+        print('Złapałeś//łaś mnie!')
