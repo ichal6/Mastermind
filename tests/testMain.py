@@ -143,6 +143,19 @@ class MainTest(unittest.TestCase):
         # then
         self.assertEqual(2, game.attempt_number)
 
+    def test_7_should_display_tere_fere_if_rule_is_fair(self):
+        # given
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+        view.set_controller(controller)
+
+        # when
+        # then
+        view.is_cheater()
+
 
 if __name__ == '__main__':
     unittest.main()

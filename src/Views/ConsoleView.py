@@ -1,4 +1,3 @@
-from src.Controllers.ControllerGame import ControllerGame
 from src.Models.SecretCode import SecretCode
 from src.Views.View import View
 
@@ -20,6 +19,9 @@ class ConsoleView(View):
 
     def check_button_clicked(self, secret_code_str=None):
         secret_code_str = input("Prosze podać kod: ") if secret_code_str is None else secret_code_str
-
         if self.controller:
             self.controller.check_from_string(secret_code_str)
+
+    @staticmethod
+    def _View__fair_game_message(secret_code: str):
+        print('Tere fere. Wylosowany kod: ' + secret_code)

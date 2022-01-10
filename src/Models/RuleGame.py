@@ -28,3 +28,6 @@ class GameRule(ABC):
 
     def get_count_incorrect_position(self, possible_code) -> int:
         raise NotImplementedError
+
+    def get_code_value(self) -> str:
+        return str(self._secret_code)
