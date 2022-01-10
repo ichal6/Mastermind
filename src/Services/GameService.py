@@ -68,7 +68,10 @@ class GameService:
         Subclass of GameRule
         """
         secret_code = SecretCode()
-        game_rule = random.sample({CheatGame.CheatGame, FairGame.FairGame}, 1)[0]
+        # TODO odkomomentować po testach
+        # game_rule = random.sample({CheatGame.CheatGame, FairGame.FairGame}, 1)[0]
+        game_rule = FairGame.FairGame
+        # TODO
         game = game_rule(secret_code)
 
         return game

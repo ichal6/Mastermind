@@ -2,6 +2,7 @@ import tkinter as tk
 
 from src.Controllers.ControllerGame import ControllerGame
 from src.Models.CheatGame import CheatGame
+from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.TkInterView import TkinterView
 
@@ -13,7 +14,7 @@ class App(tk.Tk):
         self.title('Mastermind')
 
         secret_code = SecretCode()
-        game = CheatGame(secret_code)
+        game = FairGame(secret_code)
         view = TkinterView(self)
         view.grid(row=0, column=0, padx=10, pady=10)
         controller = ControllerGame(game, view)
