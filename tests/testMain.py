@@ -155,8 +155,9 @@ class MainTest(unittest.TestCase):
         view.set_controller(controller)
 
         # when
+        is_cheater = view.is_cheater()
         # then
-        view.is_cheater()
+        self.assertEqual(False, is_cheater)
 
     def test_8_should_display_info_about_cheat_if_rule_is_cheat(self):
         # given
@@ -168,8 +169,9 @@ class MainTest(unittest.TestCase):
         view.set_controller(controller)
 
         # when
+        is_cheater = view.is_cheater()
         # then
-        view.is_cheater()
+        self.assertEqual(True, is_cheater)
 
     def test_9_should_can_reset_the_game(self):
         # given
