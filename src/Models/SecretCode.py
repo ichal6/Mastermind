@@ -5,11 +5,11 @@ from src.Validations.DataValidation import DataValidation
 
 class SecretCode:
     def __init__(self, secret_code: dict = None):
-        self.__secret_code = dict() if secret_code is None else secret_code.copy()
+        positions = [0, 1, 2, 3]
         if secret_code is None:
-            for number in range(0, 4):
-                self.__secret_code[number] = random.randint(1, 6)
+            self.__secret_code = {position: random.randint(1, 6) for position in positions}
         else:
+            self.__secret_code = secret_code.copy()
             DataValidation.validate_secret_code_dict(secret_code)
 
     def __str__(self):
