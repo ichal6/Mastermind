@@ -15,8 +15,9 @@ class App(tk.Tk):
         super().__init__()
 
         self.title('Mastermind')
-
-        secret_code = SecretCode()
+        # TODO Usunąć na produkcji
+        secret_code_dict = {0: 5, 1: 4, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
         game = FairGame(secret_code)
         view = TkinterView(self)
         view.grid(row=0, column=0, padx=10, pady=10)
