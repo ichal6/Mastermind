@@ -104,20 +104,20 @@ class MainTest(unittest.TestCase):
         game = FairGame(secret_code)
         view = ConsoleView()
         controller = ControllerGame(game, view)
+        view.set_controller(controller)
 
         wrong_code = SecretCode(generate_wrong_answer(secret_code_dict))
-        # when
-        is_win = game.check(wrong_code)
 
-        # then
+        # when
         print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         for count in range(1, 13):
             print('\nPróba numer: ', count)
-            controller.check(wrong_code)
+            view.check_button_clicked(str(wrong_code))
 
-        self.assertIs(is_win, False)
+        # then
+        self.assertEqual(12, game.attempt_number)
 
     def test_6_should_disregard_code_if_format_is_incorrect(self):
         # given
