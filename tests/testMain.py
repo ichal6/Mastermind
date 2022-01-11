@@ -180,7 +180,7 @@ class MainTest(unittest.TestCase):
         for _ in range(10):
             view.check_button_clicked("1234")
         view.reset()
-        wrong_answer = generate_wrong_answer(controller._ControllerGame__game._secret_code.secret_code)
+        wrong_answer = generate_wrong_answer(controller._ControllerGame__game.secret_code.secret_code)
         wrong_answer_dict = convert_dict_secret_code_to_string(wrong_answer)
         for _ in range(5):
             view.check_button_clicked(wrong_answer_dict)

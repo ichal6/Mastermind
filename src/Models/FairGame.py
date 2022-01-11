@@ -8,10 +8,10 @@ class FairGame(GameRule):
 
     def check(self, possible_code: SecretCode) -> bool:
         self.increase_attempt_number()
-        return self._secret_code.equal_code(possible_code) if True else False
+        return self.secret_code.equal_code(possible_code) if True else False
 
     def get_count_correct_position(self, possible_code: SecretCode) -> int:
-        return self._secret_code.count_correct_position(possible_code)
+        return self.secret_code.count_correct_position(possible_code)
 
     def get_count_incorrect_position(self, possible_code: SecretCode) -> int:
-        return self._secret_code.count_incorrect_position(possible_code)
+        return self.secret_code.count_incorrect_position(possible_code)

@@ -4,7 +4,7 @@ from src.Models.SecretCode import SecretCode
 
 class GameRule(ABC):
     def __init__(self, secret_code: SecretCode):
-        self._secret_code = secret_code
+        self.__secret_code = secret_code
         self.__attempt_number = 0
         self.__MAX_ATTEMPT = 12
 
@@ -20,6 +20,10 @@ class GameRule(ABC):
     def attempt_number(self):
         return self.__attempt_number
 
+    @property
+    def secret_code(self):
+        return self.__secret_code
+
     def max_attempt(self):
         return self.__MAX_ATTEMPT
 
@@ -30,4 +34,4 @@ class GameRule(ABC):
         raise NotImplementedError
 
     def get_code_value(self) -> str:
-        return str(self._secret_code)
+        return str(self.__secret_code)
