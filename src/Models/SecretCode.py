@@ -5,7 +5,7 @@ from src.Validations.DataValidation import DataValidation
 
 class SecretCode:
     def __init__(self, secret_code: dict = None):
-        positions = [0, 1, 2, 3]
+        positions = [p for p in range(0, 4)]
         if secret_code is None:
             self.__secret_code = {position: random.randint(1, 6) for position in positions}
         else:
