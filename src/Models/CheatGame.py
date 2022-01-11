@@ -21,17 +21,17 @@ class CheatGame(GameRule):
         last_index = len(secret_code_list) - 1
         list_for_generator = [secret_code_list[i] for i in range(last_index, -1, -1)]
 
-        self.generator_c_p = (i % 4 for i in range(self.max_attempt()))
-        self.generator_i_p = (i % 4 for i in list_for_generator)
+        self.__generator_c_p = (i % 4 for i in range(self.max_attempt()))
+        self.__generator_i_p = (i % 4 for i in list_for_generator)
 
     def check(self, possible_code: SecretCode) -> bool:
         self.increase_attempt_number()
         return False
 
     def get_count_correct_position(self, possible_code: SecretCode) -> int:
-        for value in self.generator_c_p:
+        for value in self.__generator_c_p:
             return value
 
     def get_count_incorrect_position(self, possible_code: SecretCode) -> int:
-        for value in self.generator_i_p:
+        for value in self.__generator_i_p:
             return value
