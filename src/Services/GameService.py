@@ -47,16 +47,14 @@ class GameService:
         code_list = GameService.__convert(secret_code_raw)
         if len(code_list) != 4:
             raise IncorrectSecretCodeError("Wrong size of code")
-        code_dict = dict()
         try:
-            for key in range(0, 4):
-                code_dict[key] = int(code_list[key])
+            positions = [p for p in range(0, 4)]
+            code_dict = {position: int(code_list[position]) for position in positions}
+            return SecretCode(code_dict)
         except IndexError:
             raise IncorrectSecretCodeError("Too short code")
         except ValueError:
             raise IncorrectSecretCodeError("Not an integer number in code")
-
-        return SecretCode(code_dict)
 
     @staticmethod
     def build_game_rule() -> RuleGame:
