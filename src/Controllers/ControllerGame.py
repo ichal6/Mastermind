@@ -15,11 +15,11 @@ class ControllerGame:
         count_correct_positions = self.__game.get_count_correct_position(possible_code)
         count_incorrect_positions = self.__game.get_count_incorrect_position(possible_code)
         is_win = self.__game.check(possible_code)
-        self.__view.answer(possible_code, count_correct_positions, count_incorrect_positions)
         if is_win:
             self.__view.win()
         if self.__game.attempt_number == self.__game.max_attempt():
             self.__view.game_over()
+        self.__view.answer(possible_code, count_correct_positions, count_incorrect_positions)
 
     def check_from_string(self, secret_code_raw: str):
         """
