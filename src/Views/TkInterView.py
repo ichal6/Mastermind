@@ -39,11 +39,11 @@ class TkinterView(View, tk.Frame):
         self.s_code_ent.grid(row=2, column=0, sticky=tk.NS, pady=10)
 
         # buttons
-        self.check_btn = tk.Button(self.menu_left_upper, text='Sprawdź', command=self.check_button_clicked)
+        self.check_btn = tk.Button(self.menu_left_upper, text='Sprawdź', command=lambda: self.check_button_clicked())
         self.check_btn.grid(row=2, column=1, padx=10)
-        self.cheat_btn = tk.Button(self.menu_left_upper, text='Oszust', command=self.is_cheater)
+        self.cheat_btn = tk.Button(self.menu_left_upper, text='Oszust', command=lambda: self.is_cheater())
         self.cheat_btn.grid(row=3, column=0, padx=10, pady=10)
-        self.reset_btn = tk.Button(self.menu_left_upper, text='Reset', command=self.reset)
+        self.reset_btn = tk.Button(self.menu_left_upper, text='Reset', command=lambda: self.reset())
         self.reset_btn.grid(row=3, column=1, padx=10, pady=10)
         self.about_btn = tk.Button(self.menu_left_lower, text='O programie',
                                    command=lambda: box.showinfo('O programie', logs.lang['about']))
