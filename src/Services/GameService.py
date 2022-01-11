@@ -11,7 +11,7 @@ class GameService:
     """
 
     @staticmethod
-    def __convert(string):
+    def __convert(string) -> list:
         """
         Convert from string to list
 
@@ -30,7 +30,7 @@ class GameService:
         return list1
 
     @staticmethod
-    def build_secret_code(secret_code_raw: str):
+    def build_secret_code(secret_code_raw: str) -> SecretCode:
         """
         Generate object Secret Code from raw str
 
