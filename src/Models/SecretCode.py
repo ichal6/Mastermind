@@ -41,6 +41,6 @@ class SecretCode:
         for key, value in other.secret_code.items():
             if self.__secret_code[key] == value:
                 continue
-            if self.__secret_code[key] in values:
+            elif value in values:
                 count += 1
         return count
