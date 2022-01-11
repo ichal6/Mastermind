@@ -6,6 +6,9 @@ from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
 from src.Views.TkInterView import TkinterView
 
+WIDTH = 550
+HEIGHT = 620
+
 
 class App(tk.Tk):
     def __init__(self):
@@ -23,4 +26,10 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     app = App()
+
+    # set minimum window size value
+    app.minsize(WIDTH, HEIGHT)
+
+    # set maximum window size value
+    app.maxsize(WIDTH, HEIGHT)
     app.mainloop()
