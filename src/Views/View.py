@@ -3,14 +3,18 @@ from abc import ABC, abstractmethod
 
 class View(ABC):
     def __init__(self):
-        self.controller = None
+        self.__controller = None
 
     def set_controller(self, controller):
-        self.controller = controller
+        self.__controller = controller
+
+    @property
+    def controller(self):
+        return self.__controller
 
     def is_cheater(self):
-        is_cheater = self.controller.is_cheater()
-        secret_code_as_str = self.controller.display_code()
+        is_cheater = self.__controller.is_cheater()
+        secret_code_as_str = self.__controller.display_code()
 
         if is_cheater:
             self.__cheat_game_message()
