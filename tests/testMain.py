@@ -1,7 +1,6 @@
 import unittest
 
 from src.Controllers.ControllerGame import ControllerGame
-from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.CheatGame import CheatGame
 from src.Models.FairGame import FairGame
 from src.Models.SecretCode import SecretCode
@@ -24,7 +23,7 @@ class MainTest(unittest.TestCase):
         is_win = game.check(wrong_code)
         number_of_correct_position = game.get_count_correct_position(wrong_code)
         # then
-        print("\nWylosowany secret code: ", end="")
+        print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         controller.check(wrong_code)
@@ -46,7 +45,7 @@ class MainTest(unittest.TestCase):
         number_of_incorrect_position = game.get_count_incorrect_position(mixed_position_code)
 
         # then
-        print("\nWylosowany secret code: ", end="")
+        print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         controller.check(mixed_position_code)
@@ -66,7 +65,7 @@ class MainTest(unittest.TestCase):
         number_of_correct_position = game.get_count_correct_position(half_correct_code)
 
         # then
-        print("\nWylosowany secret code: ", end="")
+        print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         controller.check(half_correct_code)
@@ -89,7 +88,7 @@ class MainTest(unittest.TestCase):
         is_win = game.check(hit_correct_code)
 
         # then
-        print("\nWylosowany secret code: ", end="")
+        print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         controller.check(hit_correct_code)
@@ -111,7 +110,7 @@ class MainTest(unittest.TestCase):
         is_win = game.check(wrong_code)
 
         # then
-        print("\nWylosowany secret code: ", end="")
+        print("\nSecret code: ", end="")
         print_secret_code(secret_code.secret_code)
         print("", flush=True)
         for count in range(1, 13):
@@ -187,6 +186,25 @@ class MainTest(unittest.TestCase):
             view.check_button_clicked(wrong_answer_dict)
         # then
         self.assertEqual(5, controller._ControllerGame__game.attempt_number)
+
+    def test_10_play_game(self):
+        # given
+        secret_code_dict = {0: 1, 1: 2, 2: 3, 3: 4}
+        secret_code = SecretCode(secret_code_dict)
+        game = FairGame(secret_code)
+        view = ConsoleView()
+        controller = ControllerGame(game, view)
+        view.set_controller(controller)
+        answers = list()
+        # when
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 6, 1: 6, 2: 2, 3: 2})))
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 4, 1: 3, 2: 3, 3: 6})))
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 1, 1: 4, 2: 1, 3: 6})))
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 3, 1: 3, 2: 4, 3: 6})))
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 2, 1: 3, 2: 1, 3: 4})))
+        answers.append(game.get_count_incorrect_position(SecretCode({0: 1, 1: 2, 2: 3, 3: 4})))
+        # then
+        self.assertEqual([1, 1, 1, 2, 3, 0], answers)
 
 
 if __name__ == '__main__':

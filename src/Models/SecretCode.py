@@ -37,10 +37,18 @@ class SecretCode:
 
     def count_incorrect_position(self, other):
         count = 0
-        values = list(self.__secret_code.values())
+        print(self.__str__())
+        correct_list = list(self.__secret_code.values())
+        hit_list = correct_list.copy()
+        # for i in range(4):
+        #     if self_values[i] != other_values[i]:
+        #         count += 1
+        for key, value in other.secret_code.items():
+            if value in correct_list:
+                if value in hit_list:
+                    count += 1
+                    hit_list.remove(value)
         for key, value in other.secret_code.items():
             if self.__secret_code[key] == value:
-                continue
-            elif value in values:
-                count += 1
+                count -= 1
         return count
