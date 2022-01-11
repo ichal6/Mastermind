@@ -40,9 +40,7 @@ class SecretCode:
         print(self.__str__())
         correct_list = list(self.__secret_code.values())
         hit_list = correct_list.copy()
-        # for i in range(4):
-        #     if self_values[i] != other_values[i]:
-        #         count += 1
+        
         for key, value in other.secret_code.items():
             if value in correct_list:
                 if value in hit_list:
