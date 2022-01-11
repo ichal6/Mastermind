@@ -1,7 +1,10 @@
+import tkinter
+
 from src.Models.SecretCode import SecretCode
 from src.Views.View import View
 import tkinter as tk
-import tkinter.messagebox
+import tkinter.messagebox as box
+import src.Views.lang_pl as logs
 
 
 def messagebox(title, text):
@@ -42,15 +45,22 @@ class TkinterView(View, tk.Frame):
         self.cheat_btn.grid(row=3, column=0, padx=10, pady=10)
         self.reset_btn = tk.Button(self.menu_left_upper, text='Reset', command=self.reset)
         self.reset_btn.grid(row=3, column=1, padx=10, pady=10)
+        self.about_btn = tk.Button(self.menu_left_lower, text='O programie',
+                                   command=lambda: box.showinfo('O programie', logs.lang['about']))
+        self.about_btn.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
+
+        self.manual_btn = tk.Button(self.menu_left_lower, text='Instrukcja',
+                                    command=lambda: box.showinfo('Instrukcja gry', logs.lang['manual']))
+        self.manual_btn.grid(row=0, column=1, padx=10, pady=10, sticky=tk.E)
 
     def init_left_side_menu(self):
         # left-side:
         self.menu_left = tk.Frame(self, width=150, bg="#ababab")
         self.menu_left_upper = tk.Frame(self.menu_left, width=150, height=150, bg="red")
-        self.menu_left_lower = tk.Frame(self.menu_left, width=150, bg="blue")
+        self.menu_left_lower = tk.Frame(self.menu_left, width=150, height=20, bg="blue")
 
         self.menu_left_upper.pack(side="top", fill="both", expand=True)
-        self.menu_left_lower.pack(side="top", fill="both", expand=True)
+        self.menu_left_lower.pack(side="bottom", fill="x", expand=False)
 
     def init_right_side_menu(self):
         # right area
@@ -59,7 +69,7 @@ class TkinterView(View, tk.Frame):
         self.some_title = tk.Label(self.some_title_frame, text="Lista odpowiedzi", bg="#dfdfdf")
         self.some_title.pack()
 
-        self.messages_area = tk.Canvas(self, width=350, height=650, background="#ffffff")
+        self.messages_area = tk.Canvas(self, width=350, height=100, background="#ffffff")
         self.messages_area.grid(row=1, column=1)
 
     def init_status_bar(self):
