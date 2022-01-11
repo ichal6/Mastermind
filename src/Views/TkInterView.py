@@ -66,7 +66,7 @@ class TkinterView(View, tk.Frame):
         # right area
         self.some_title_frame = tk.Frame(self, bg="#dfdfdf")
 
-        self.some_title = tk.Label(self.some_title_frame, text="Lista odpowiedzi", bg="#dfdfdf")
+        self.some_title = tk.Label(self.some_title_frame, text="Lista odpowiedzi:", bg="#dfdfdf")
         self.some_title.pack()
 
         self.messages_area = tk.Canvas(self, width=350, height=100, background="#ffffff")
