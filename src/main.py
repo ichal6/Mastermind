@@ -12,7 +12,14 @@ HEIGHT = 620
 
 
 class App(tk.Tk):
+    """
+    A class for display main window of app
+    """
     def __init__(self):
+        """
+        Set title, generate code to guess, random game rule, set up TkInterView
+        and set a controller
+        """
         super().__init__()
 
         self.title('Mastermind')
@@ -26,6 +33,9 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
+    """
+    Run a main program and set size of window and run a mainloop of window
+    """
     app = App()
 
     # set minimum window size value

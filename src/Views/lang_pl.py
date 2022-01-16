@@ -1,3 +1,7 @@
+"""
+Dictionary with long length inscriptions for user
+"""
+
 lang = dict()
 lang['about'] = 'Implementacja klasycznej gry mastermind w języku Python\nAutor: Michał Lechowicz\n2022'
 lang['manual'] = 'Aby zacząć grę wpisz 4 cyfrowy kod do pola. Dopuszczalne cyfry to 1,2,3,4,5,6. ' \

@@ -3,6 +3,16 @@ from src.Models.SecretCode import SecretCode
 
 
 class CheatGame(GameRule):
+    """
+    A class for unfair game. It's inherit from GameRule
+
+    Attributes
+    ----------
+    __generator_c_p: generator
+        a generate fake number of correct position. Use max attempts and modulo
+    __generator_i_p: generator
+        a generate fake number of incorrect position. Use secret code (for base) and modulo
+    """
     def __init__(self, secret_code):
         """
         Initialize false rule for game.
@@ -25,13 +35,27 @@ class CheatGame(GameRule):
         self.__generator_i_p = (i % 4 for i in list_for_generator)
 
     def check(self, possible_code: SecretCode) -> bool:
+        """
+        Increment attempt counter and return false
+
+        Parameters
+        ----------
+        possible_code: SecretCode
+          secret code for check
+        """
         self.increase_attempt_number()
         return False
 
     def get_count_correct_position(self, possible_code: SecretCode) -> int:
+        """
+        Use generator for return correct position value. Ignore code from user
+        """
         for value in self.__generator_c_p:
             return value
 
     def get_count_incorrect_position(self, possible_code: SecretCode) -> int:
+        """
+        Use generator for return incorrect position value. Ignore code from user
+        """
         for value in self.__generator_i_p:
             return value

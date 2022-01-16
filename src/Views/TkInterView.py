@@ -8,6 +8,16 @@ import src.Views.lang_pl as logs
 
 
 def messagebox(title, text):
+    """
+    Static function for display popup
+
+    Parameters
+    ----------
+    title: str
+        Title for top label in window
+    text: str
+        Text to display in popup body
+    """
     root = tkinter.Tk()
     root.withdraw()
     tkinter.messagebox.showinfo(title, text)
@@ -15,7 +25,19 @@ def messagebox(title, text):
 
 
 class TkinterView(View, tk.Frame):
+    """
+    A class for interaction with user in GUI
+    """
     def __init__(self, parent):
+        """
+        Initialize main frame of window and assigns frame to main window of App.
+        Run a methods to initialize a menu and list of answers
+
+        Parameters
+        ----------
+        parent: App
+            The main window of tkInter
+        """
         super().__init__()
         tk.Frame.__init__(self, parent)
         self.count = 1
@@ -28,6 +50,24 @@ class TkinterView(View, tk.Frame):
         self.init_grids()
 
     def create_widgets(self):
+        """
+        Create a widgets in layout
+
+        Fields
+        ----------
+        guess_code_lbl: tk.Label
+            Label with invitation for user
+        s_code_var: tk.StringVar
+            place for code from user
+        check_btn: tk.Button
+            button to click with check the code
+        reset_btn: tk.Button
+            button for reset a game
+        about_btn: tk.Button
+            button for display about information
+        manual_btn: tk.Button
+            button display manual(instructions) about game
+        """
         # labels
         self.guess_code_lbl = tk.Label(self.menu_left_upper, text='Zgadnij kod:')
         self.guess_code_lbl.grid(row=0, columnspan=2, sticky=tk.NSEW)
@@ -55,6 +95,17 @@ class TkinterView(View, tk.Frame):
 
     def init_left_side_menu(self):
         # left-side:
+        """
+        initialize left part of program
+
+        Fields:
+        menu_left: tk.Frame
+            Frame for left part of menu
+        menu_left_upper: tk.Frame
+            Frame for upper side of menu left
+        menu_left_lower: tk.Frame
+            Frame for lower side of menu left
+        """
         self.menu_left = tk.Frame(self, width=150, bg="#ababab")
         self.menu_left_upper = tk.Frame(self.menu_left, width=150, height=150, bg="red")
         self.menu_left_lower = tk.Frame(self.menu_left, width=150, height=20, bg="blue")
@@ -63,6 +114,17 @@ class TkinterView(View, tk.Frame):
         self.menu_left_lower.pack(side="bottom", fill="x", expand=False)
 
     def init_right_side_menu(self):
+        """
+        initialize right part of program
+
+        Fields:
+        some_title_frame: tk.Frame
+            Frame for title with list of answers
+        some_title: tk.Label
+            Label for text with list of answers
+        message_area: tk.Canvas
+            Area for list of answers from program
+        """
         # right area
         self.some_title_frame = tk.Frame(self, bg="#dfdfdf")
 
@@ -73,12 +135,24 @@ class TkinterView(View, tk.Frame):
         self.messages_area.grid(row=1, column=1)
 
     def init_status_bar(self):
+        """
+        Status bar for errors and warnings message
+
+        Fields:
+        status_frame: tk.Frame
+            frame for label with information
+        status: Label
+            label for information from program to user
+        """
         # status bar
         self.status_frame = tk.Frame(self)
         self.status = tk.Label(self.status_frame, text="", foreground='red')
         self.status.pack(fill="both", expand=True)
 
     def init_grids(self):
+        """
+        Initialize grids.
+        """
         self.menu_left.grid(row=0, column=0, rowspan=2, sticky="nsew")
         self.some_title_frame.grid(row=0, column=1, sticky="ew")
         self.messages_area.grid(row=1, column=1, sticky="nsew")

@@ -3,6 +3,7 @@ from src.Views.View import View
 
 
 class ConsoleView(View):
+    """Class used to interaction with user in terminal"""
     def __init__(self):
         super().__init__()
 
