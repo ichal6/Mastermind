@@ -7,11 +7,41 @@ from src.Views.View import View
 
 
 class ControllerGame:
+    """
+    A class used to control behavior of program
+
+    Attributes
+    ----------
+    __game: GameRule
+        rule of game which use in class.
+    __view: View
+        view use for display information for use (ConsoleView or TkInterView)
+    """
     def __init__(self, game_rule: GameRule, view: View):
+        """
+        Parameters
+        ----------
+        game_rule: GameRule
+            One of two rules of game: FairGame or ChetGame
+        view: View
+            One of two view: ConsoleView or TkInterView
+        """
         self.__game = game_rule
         self.__view = view
 
     def check(self, possible_code: SecretCode):
+        """
+        This function check a code from user.
+        If it is the same as random code generate by computer display a win message.
+        If not check a count of attempt and if counter equal max attempts
+        display lose message. If not answer attend to list of answers and game is
+        continue
+
+        Parameters
+        ----------
+        possible_code: SecretCode
+            Object with code, was input from user
+        """
         count_correct_positions = self.__game.get_count_correct_position(possible_code)
         count_incorrect_positions = self.__game.get_count_incorrect_position(possible_code)
         is_win = self.__game.check(possible_code)
