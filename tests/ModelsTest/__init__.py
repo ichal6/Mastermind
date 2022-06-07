@@ -1,1 +1,1 @@
-__all__ = ["testSecretCode"]
+__all__ = ["testSecretCode", "testFairGame", "testGameRule", "testResult"]
