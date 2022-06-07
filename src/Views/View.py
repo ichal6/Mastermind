@@ -34,6 +34,7 @@ class View(ABC):
         secret_code_as_str = self.__controller.display_code()
 
         if is_cheater:
+            self.__controller.save_winner()
             self.__cheat_game_message()
             self.reset()
             return True
@@ -107,4 +108,8 @@ class View(ABC):
         """
         Display info: It's not a fair game.
         """
+        raise NotImplementedError
+
+    @abstractmethod
+    def provide_name(self, is_test=False):
         raise NotImplementedError

@@ -37,3 +37,9 @@ class ConsoleView(View):
     @staticmethod
     def _View__cheat_game_message():
         print('Złapałeś/łaś mnie!')
+
+    def provide_name(self, is_test=False):
+        if is_test:
+            return "Mike"
+        else:
+            return input("Provide your name: ")

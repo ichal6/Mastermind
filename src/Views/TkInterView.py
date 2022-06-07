@@ -24,6 +24,25 @@ def messagebox(title, text):
     root.destroy()
 
 
+class PopupWindow(object):
+    def __init__(self, master, title: str):
+        top = self.top = tkinter.Toplevel(master)
+        top.geometry("250x80")
+        self.master = master
+        self.top.title(title)
+        self.l = tkinter.Label(top, text="Wprowadź swoje imie")
+        self.l.pack()
+        self.e = tkinter.Entry(top)
+        self.e.pack()
+        self.b = tkinter.Button(top, text='OK', command=self.cleanup)
+        self.b.pack()
+        master.withdraw()
+
+    def cleanup(self):
+        self.value = self.e.get()
+        self.top.destroy()
+
+
 class TkinterView(View, tk.Frame):
     """
     A class for interaction with user in GUI
@@ -174,6 +193,7 @@ class TkinterView(View, tk.Frame):
             count += 1
 
     def win(self):
+        self.controller.save_winner()
         self.reset()
         messagebox('Wygrałeś!', 'Moje gratulacje!')
 
@@ -215,3 +235,12 @@ class TkinterView(View, tk.Frame):
     @staticmethod
     def _View__cheat_game_message():
         messagebox('Wygrałeś!', 'Złapałeś/łaś mnie!')
+
+    def provide_name(self, is_test=False):
+        self.winner = PopupWindow(self.master, "Wygrałeś")
+        self.master.wait_window(self.winner.top)
+        self.master.deiconify()
+        if hasattr(self.winner, 'value'):
+            return self.winner.value
+        else:
+            return "Anonymous"
