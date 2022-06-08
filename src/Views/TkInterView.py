@@ -205,9 +205,9 @@ class TkinterView(View, tk.Frame):
             count += 1
 
     def win(self):
+        messagebox('Wygrałeś!', 'Moje gratulacje!')
         self.controller.save_winner()
         self.reset()
-        messagebox('Wygrałeś!', 'Moje gratulacje!')
 
     def game_over(self):
         self.reset()

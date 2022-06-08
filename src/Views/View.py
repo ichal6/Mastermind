@@ -34,8 +34,8 @@ class View(ABC):
         secret_code_as_str = self.__controller.display_code()
 
         if is_cheater:
-            self.__controller.save_winner()
             self.__cheat_game_message()
+            self.__controller.save_winner()
             self.reset()
             return True
         else:
