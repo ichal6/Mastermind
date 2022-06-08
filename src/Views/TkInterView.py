@@ -34,9 +34,16 @@ class PopupWindow(object):
         self.l.pack()
         self.e = tkinter.Entry(top)
         self.e.pack()
-        self.b = tkinter.Button(top, text='OK', command=self.cleanup)
+        self.b = tkinter.Button(top, text='OK', command=self.valid)
         self.b.pack()
+        self.error = tkinter.Label(top, text="Wprowadź poprawne imie!", fg='#f00')
         master.withdraw()
+
+    def valid(self):
+        if self.e.get() == "":
+            self.error.pack()
+        else:
+            self.cleanup()
 
     def cleanup(self):
         self.value = self.e.get()
