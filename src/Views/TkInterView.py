@@ -25,8 +25,13 @@ def messagebox(title, text):
 
 
 class PopupWindow(object):
+
+    def disable_event(self):
+        pass
+
     def __init__(self, master, title: str):
         top = self.top = tkinter.Toplevel(master)
+        top.protocol("WM_DELETE_WINDOW", self.disable_event)
         top.geometry("250x80")
         self.master = master
         self.top.title(title)
