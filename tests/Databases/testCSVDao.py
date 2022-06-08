@@ -22,7 +22,7 @@ class TestCSVDao(TestCase):
         with open(self.FILENAME) as f:
             lines = f.readlines()
 
-        entry = name + ' ' + str(attempt_number) + ' ' + str(date) + '\n'
+        entry = name + ' ' + str(attempt_number) + ' ' + str(datetime.timestamp(date)) + '\n'
         expected_output = [entry]
 
         # then
@@ -36,13 +36,13 @@ class TestCSVDao(TestCase):
 
         # when
         dao = CSVDao(self.FILENAME)
-        lines = dao.get_results()
-
-        entry = name + ' ' + str(attempt_number) + ' ' + str(date) + '\n'
-        expected_output = [entry]
+        results = dao.get_results()
 
         # then
-        self.assertEqual(expected_output, lines)
+        self.assertEqual(1, len(results))
+        self.assertEqual(name, results[0].get_name())
+        self.assertEqual(attempt_number, results[0].get_attempt())
+        self.assertEqual(date, results[0].get_date())
 
     @classmethod
     def tearDownClass(cls):
