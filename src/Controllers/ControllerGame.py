@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from src.Databases.CSVDao import CSVDao
 from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.CheatGame import CheatGame
@@ -79,4 +81,4 @@ class ControllerGame:
 
     def save_winner(self):
         name_of_winner = self.__view.provide_name("Wygrałeś")
-        self.__dao.save_result(name_of_winner, self.__game.attempt_number)
+        self.__dao.save_result(name_of_winner, self.__game.attempt_number, datetime.now())

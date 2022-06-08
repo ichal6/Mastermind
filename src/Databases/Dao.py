@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 
 class Dao(ABC):
@@ -7,7 +8,7 @@ class Dao(ABC):
     """
 
     @abstractmethod
-    def save_result(self, name: str, attempt_number: int):
+    def save_result(self, name: str, attempt_number: int, date: datetime):
         raise NotImplementedError
 
     @abstractmethod
