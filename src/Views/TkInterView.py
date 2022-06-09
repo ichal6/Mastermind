@@ -36,7 +36,7 @@ class DisplayResultWindow(object):
             Master window
         """
         top = self.top = tkinter.Toplevel(master)
-        top.geometry("355x130")
+        top.geometry("390x230")
         self.master = master
         self.top.title(logs.lang['result_title'])
         self.result_title_frame = tk.Frame(top, bg="#dfdfdf")
@@ -45,9 +45,31 @@ class DisplayResultWindow(object):
         self.result_title = tk.Label(self.result_title_frame, text=logs.lang['result_label'], bg="#dfdfdf")
         self.result_title.pack()
 
-        self.messages_area = tk.Canvas(top, width=350, height=100, background="#ffffff")
+        self.messages_area = tk.Canvas(top, width=450, height=100, background="#ffffff")
         self.messages_area.grid(row=1, column=0)
+
         master.withdraw()
+
+    def display_results(self, list_of_winners: []):
+        """
+        Fill result on canvas
+        """
+
+        count = 1
+        answers = []
+        for winner in list_of_winners:
+            text = f'{count}' + f'. Imie: {winner.get_name()}' \
+                   + f'\tIlość prób: {winner.get_attempt()}' \
+                   + f'\tData: {winner.get_date()}'
+            answer = tk.Label(self.messages_area, width=55, background="#666565", text=text)
+            answers.append(answer)
+            count += 1
+        count = 0
+        for single in answers:
+            if count == 10:
+                break
+            single.grid(row=count, column=0, sticky=tk.EW)
+            count += 1
 
 
 class InputUserNameWindow(object):
@@ -309,6 +331,7 @@ class TkinterView(View, tk.Frame):
 
     def __display_result(self):
         self.result_window = DisplayResultWindow(self.master)
+        self.result_window.display_results(self.controller.get_results())
         self.master.wait_window(self.result_window.top)
         self.master.deiconify()
 

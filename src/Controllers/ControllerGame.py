@@ -82,3 +82,6 @@ class ControllerGame:
     def save_winner(self):
         name_of_winner = self.__view.provide_name("Wygrałeś")
         self.__dao.save_result(name_of_winner, self.__game.attempt_number, datetime.now())
+
+    def get_results(self):
+        return self.__dao.get_results()
