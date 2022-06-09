@@ -24,12 +24,24 @@ def messagebox(title, text):
     root.destroy()
 
 
-class PopupWindow(object):
-
+class InputUserNameWindows(object):
+    """
+    Class for display input for username for save records
+    """
     def disable_event(self):
         pass
 
     def __init__(self, master, title: str):
+        """
+        Initialize window
+
+        Parameters
+        ----------
+        master
+            Master window
+        title: str
+            Title in label of window
+        """
         top = self.top = tkinter.Toplevel(master)
         top.protocol("WM_DELETE_WINDOW", self.disable_event)
         top.geometry("250x80")
@@ -45,12 +57,18 @@ class PopupWindow(object):
         master.withdraw()
 
     def valid(self):
+        """
+        Check input
+        """
         if self.e.get() == "":
             self.error.pack()
         else:
             self.cleanup()
 
     def cleanup(self):
+        """
+        Destroy a window
+        """
         self.value = self.e.get()
         self.top.destroy()
 
@@ -255,7 +273,7 @@ class TkinterView(View, tk.Frame):
         messagebox('Wygrałeś!', 'Złapałeś/łaś mnie!')
 
     def provide_name(self, is_test=False):
-        self.winner = PopupWindow(self.master, "Wygrałeś")
+        self.winner = InputUserNameWindows(self.master, "Wygrałeś")
         self.master.wait_window(self.winner.top)
         self.master.deiconify()
         if hasattr(self.winner, 'value'):
