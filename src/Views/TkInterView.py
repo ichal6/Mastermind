@@ -34,20 +34,19 @@ class DisplayResultWindow(object):
         ----------
         master
             Master window
-        title: str
-            Title in label of window
         """
         top = self.top = tkinter.Toplevel(master)
-        top.geometry("250x80")
+        top.geometry("355x130")
         self.master = master
         self.top.title(logs.lang['result_title'])
-        self.some_title_frame = tk.Frame(top, bg="#dfdfdf")
+        self.result_title_frame = tk.Frame(top, bg="#dfdfdf")
+        self.result_title_frame.grid(row=0, column=0, sticky=tk.EW)
 
-        self.some_title = tk.Label(self.some_title_frame, text=logs.lang['result_label'], bg="#dfdfdf")
-        self.some_title.pack()
+        self.result_title = tk.Label(self.result_title_frame, text=logs.lang['result_label'], bg="#dfdfdf")
+        self.result_title.pack()
 
         self.messages_area = tk.Canvas(top, width=350, height=100, background="#ffffff")
-        self.messages_area.grid(row=1, column=1)
+        self.messages_area.grid(row=1, column=0)
         master.withdraw()
 
 
