@@ -7,3 +7,5 @@ lang['about'] = 'Implementacja klasycznej gry mastermind w języku Python\nAutor
 lang['manual'] = 'Aby zacząć grę wpisz 4 cyfrowy kod do pola. Dopuszczalne cyfry to 1,2,3,4,5,6. ' \
                  'Masz 12 prób na odgadnięcie kodu. Twoje próby wraz z popowiedziami wyświetlane są po prawej stronie. ' \
                  'Uwaga! Gra może oszukiwać. Jesli jestes pewny, że komputer kłamie, naciśnij przycisk Oszust.'
+lang['result_label'] = 'Lista wyników:'
+lang['result_title'] = 'Wyniki'

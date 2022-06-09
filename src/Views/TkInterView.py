@@ -24,7 +24,34 @@ def messagebox(title, text):
     root.destroy()
 
 
-class InputUserNameWindows(object):
+class DisplayResultWindow(object):
+
+    def __init__(self, master):
+        """
+        Initialize window
+
+        Parameters
+        ----------
+        master
+            Master window
+        title: str
+            Title in label of window
+        """
+        top = self.top = tkinter.Toplevel(master)
+        top.geometry("250x80")
+        self.master = master
+        self.top.title(logs.lang['result_title'])
+        self.some_title_frame = tk.Frame(top, bg="#dfdfdf")
+
+        self.some_title = tk.Label(self.some_title_frame, text=logs.lang['result_label'], bg="#dfdfdf")
+        self.some_title.pack()
+
+        self.messages_area = tk.Canvas(top, width=350, height=100, background="#ffffff")
+        self.messages_area.grid(row=1, column=1)
+        master.withdraw()
+
+
+class InputUserNameWindow(object):
     """
     Class for display input for username for save records
     """
@@ -145,7 +172,7 @@ class TkinterView(View, tk.Frame):
                                     command=lambda: box.showinfo('Instrukcja gry', logs.lang['manual']))
         self.manual_btn.grid(row=0, column=1, padx=10, pady=10, sticky=tk.E)
 
-        self.result_btn = tk.Button(self.menu_left_lower, text='Wyniki', command=lambda: self.reset(), width=10)
+        self.result_btn = tk.Button(self.menu_left_lower, text='Wyniki', command=lambda: self.__display_result(), width=10)
         self.result_btn.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 
     def init_left_side_menu(self):
@@ -273,10 +300,16 @@ class TkinterView(View, tk.Frame):
         messagebox('Wygrałeś!', 'Złapałeś/łaś mnie!')
 
     def provide_name(self, is_test=False):
-        self.winner = InputUserNameWindows(self.master, "Wygrałeś")
+        self.winner = InputUserNameWindow(self.master, "Wygrałeś")
         self.master.wait_window(self.winner.top)
         self.master.deiconify()
         if hasattr(self.winner, 'value'):
             return self.winner.value
         else:
             return "Anonymous"
+
+    def __display_result(self):
+        self.result_window = DisplayResultWindow(self.master)
+        self.master.wait_window(self.result_window.top)
+        self.master.deiconify()
+
