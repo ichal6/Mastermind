@@ -97,12 +97,15 @@ class TkinterView(View, tk.Frame):
         about_btn: tk.Button
             button for display about information
         manual_btn: tk.Button
-            button display manual(instructions) about game
+            button for display manual(instructions) about game
+        result_btn: tk.Button
+            button for display archive result of game
         """
         # labels
         self.guess_code_lbl = tk.Label(self.menu_left_upper, text='Zgadnij kod:')
-        self.guess_code_lbl.grid(row=0, columnspan=2, sticky=tk.NSEW)
+        self.guess_code_lbl.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.menu_left_upper.grid_columnconfigure(0, minsize=100, weight=1)
+        self.menu_left_upper.grid_columnconfigure(2, weight=50)
 
         # entries
         self.s_code_var = tk.StringVar()
@@ -116,13 +119,16 @@ class TkinterView(View, tk.Frame):
         self.cheat_btn.grid(row=3, column=0, padx=10, pady=10)
         self.reset_btn = tk.Button(self.menu_left_upper, text='Reset', command=lambda: self.reset())
         self.reset_btn.grid(row=3, column=1, padx=10, pady=10)
+
         self.about_btn = tk.Button(self.menu_left_lower, text='O programie',
                                    command=lambda: box.showinfo('O programie', logs.lang['about']))
         self.about_btn.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
-
         self.manual_btn = tk.Button(self.menu_left_lower, text='Instrukcja',
                                     command=lambda: box.showinfo('Instrukcja gry', logs.lang['manual']))
         self.manual_btn.grid(row=0, column=1, padx=10, pady=10, sticky=tk.E)
+
+        self.result_btn = tk.Button(self.menu_left_lower, text='Wyniki', command=lambda: self.reset(), width=10)
+        self.result_btn.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 
     def init_left_side_menu(self):
         # left-side:
