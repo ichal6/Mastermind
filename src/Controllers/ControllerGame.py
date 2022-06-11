@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from src.Databases.CSVDao import CSVDao
 from src.Exceptions.IncorrectSecretCodeError import IncorrectSecretCodeError
 from src.Models.CheatGame import CheatGame
 from src.Models.RuleGame import GameRule
@@ -28,6 +31,7 @@ class ControllerGame:
         """
         self.__game = game_rule
         self.__view = view
+        self.__dao = CSVDao()
 
     def check(self, possible_code: SecretCode):
         """
@@ -74,3 +78,10 @@ class ControllerGame:
 
     def reset(self):
         self.__game = GameService.build_game_rule()
+
+    def save_winner(self):
+        name_of_winner = self.__view.provide_name("Wygrałeś")
+        self.__dao.save_result(name_of_winner, self.__game.attempt_number, datetime.now())
+
+    def get_results(self):
+        return self.__dao.get_results()

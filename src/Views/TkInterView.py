@@ -24,6 +24,103 @@ def messagebox(title, text):
     root.destroy()
 
 
+class DisplayResultWindow(object):
+
+    def __init__(self, master):
+        """
+        Initialize window
+
+        Parameters
+        ----------
+        master
+            Master window
+        """
+        top = self.top = tkinter.Toplevel(master)
+        top.geometry("390x230")
+        self.master = master
+        self.top.title(logs.lang['result_title'])
+        self.result_title_frame = tk.Frame(top, bg="#dfdfdf")
+        self.result_title_frame.grid(row=0, column=0, sticky=tk.EW)
+
+        self.result_title = tk.Label(self.result_title_frame, text=logs.lang['result_label'], bg="#dfdfdf")
+        self.result_title.pack()
+
+        self.messages_area = tk.Canvas(top, width=450, height=100, background="#ffffff")
+        self.messages_area.grid(row=1, column=0)
+
+        master.withdraw()
+
+    def display_results(self, list_of_winners: []):
+        """
+        Fill result on canvas
+        """
+
+        count = 1
+        answers = []
+        for winner in list_of_winners:
+            text = f'{count}' + f'. Imie: {winner.get_name()}' \
+                   + f'\tIlość prób: {winner.get_attempt()}' \
+                   + f'\tData: {winner.get_date()}'
+            answer = tk.Label(self.messages_area, width=55, background="#666565", text=text)
+            answers.append(answer)
+            count += 1
+        count = 0
+        for single in answers:
+            if count == 10:
+                break
+            single.grid(row=count, column=0, sticky=tk.EW)
+            count += 1
+
+
+class InputUserNameWindow(object):
+    """
+    Class for display input for username for save records
+    """
+    def disable_event(self):
+        pass
+
+    def __init__(self, master, title: str):
+        """
+        Initialize window
+
+        Parameters
+        ----------
+        master
+            Master window
+        title: str
+            Title in label of window
+        """
+        top = self.top = tkinter.Toplevel(master)
+        top.protocol("WM_DELETE_WINDOW", self.disable_event)
+        top.geometry("250x80")
+        self.master = master
+        self.top.title(title)
+        self.l = tkinter.Label(top, text="Wprowadź swoje imie")
+        self.l.pack()
+        self.e = tkinter.Entry(top)
+        self.e.pack()
+        self.b = tkinter.Button(top, text='OK', command=self.valid)
+        self.b.pack()
+        self.error = tkinter.Label(top, text="Wprowadź poprawne imie!", fg='#f00')
+        master.withdraw()
+
+    def valid(self):
+        """
+        Check input
+        """
+        if self.e.get() == "":
+            self.error.pack()
+        else:
+            self.cleanup()
+
+    def cleanup(self):
+        """
+        Destroy a window
+        """
+        self.value = self.e.get()
+        self.top.destroy()
+
+
 class TkinterView(View, tk.Frame):
     """
     A class for interaction with user in GUI
@@ -66,12 +163,15 @@ class TkinterView(View, tk.Frame):
         about_btn: tk.Button
             button for display about information
         manual_btn: tk.Button
-            button display manual(instructions) about game
+            button for display manual(instructions) about game
+        result_btn: tk.Button
+            button for display archive result of game
         """
         # labels
         self.guess_code_lbl = tk.Label(self.menu_left_upper, text='Zgadnij kod:')
-        self.guess_code_lbl.grid(row=0, columnspan=2, sticky=tk.NSEW)
+        self.guess_code_lbl.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.menu_left_upper.grid_columnconfigure(0, minsize=100, weight=1)
+        self.menu_left_upper.grid_columnconfigure(2, weight=50)
 
         # entries
         self.s_code_var = tk.StringVar()
@@ -85,13 +185,16 @@ class TkinterView(View, tk.Frame):
         self.cheat_btn.grid(row=3, column=0, padx=10, pady=10)
         self.reset_btn = tk.Button(self.menu_left_upper, text='Reset', command=lambda: self.reset())
         self.reset_btn.grid(row=3, column=1, padx=10, pady=10)
+
         self.about_btn = tk.Button(self.menu_left_lower, text='O programie',
                                    command=lambda: box.showinfo('O programie', logs.lang['about']))
         self.about_btn.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
-
         self.manual_btn = tk.Button(self.menu_left_lower, text='Instrukcja',
                                     command=lambda: box.showinfo('Instrukcja gry', logs.lang['manual']))
         self.manual_btn.grid(row=0, column=1, padx=10, pady=10, sticky=tk.E)
+
+        self.result_btn = tk.Button(self.menu_left_lower, text='Wyniki', command=lambda: self.__display_result(), width=10)
+        self.result_btn.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 
     def init_left_side_menu(self):
         # left-side:
@@ -174,8 +277,9 @@ class TkinterView(View, tk.Frame):
             count += 1
 
     def win(self):
-        self.reset()
         messagebox('Wygrałeś!', 'Moje gratulacje!')
+        self.controller.save_winner()
+        self.reset()
 
     def game_over(self):
         self.reset()
@@ -215,3 +319,19 @@ class TkinterView(View, tk.Frame):
     @staticmethod
     def _View__cheat_game_message():
         messagebox('Wygrałeś!', 'Złapałeś/łaś mnie!')
+
+    def provide_name(self, is_test=False):
+        self.winner = InputUserNameWindow(self.master, "Wygrałeś")
+        self.master.wait_window(self.winner.top)
+        self.master.deiconify()
+        if hasattr(self.winner, 'value'):
+            return self.winner.value
+        else:
+            return "Anonymous"
+
+    def __display_result(self):
+        self.result_window = DisplayResultWindow(self.master)
+        self.result_window.display_results(self.controller.get_results())
+        self.master.wait_window(self.result_window.top)
+        self.master.deiconify()
+
