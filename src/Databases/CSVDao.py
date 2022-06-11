@@ -1,8 +1,13 @@
 from datetime import datetime
 from os.path import exists
+import sys
 
 from src.Databases.Dao import Dao
 from src.Models.Result import Result
+
+
+def e_print(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 
 class CSVDao(Dao):
@@ -22,6 +27,9 @@ class CSVDao(Dao):
             lines = f.readlines()
         for line in lines:
             line = line.split(" ")
-            result = Result(line[0], int(line[1]), datetime.fromtimestamp(float(line[2])))
-            results.append(result)
+            try:
+                result = Result(line[0], int(line[1]), datetime.fromtimestamp(float(line[2])))
+                results.append(result)
+            except ValueError as e:
+                e_print(str(e))
         return results

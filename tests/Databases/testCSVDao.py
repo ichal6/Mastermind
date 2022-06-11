@@ -8,11 +8,26 @@ class TestCSVDao(TestCase):
     @classmethod
     def setUpClass(cls):
         cls.FILENAME = '../test_score.txt'
+        cls.FILE_BAD = '../test_score_wrong.txt'
 
     def test_0_should_return_empty_result_list(self):
         # given
         # when
         dao = CSVDao(self.FILENAME)
+        results = dao.get_results()
+
+        # then
+        self.assertEqual(0, len(results))
+
+    def test_1_should_ignore_entry_if_result_in_file_is_incorrect(self):
+        # given
+        name = "Jola"
+        wrong_data = "s"
+        with open(self.FILE_BAD, 'a') as f:
+            f.write(name + ' ' + wrong_data + '\n')
+
+        # when
+        dao = CSVDao(self.FILE_BAD)
         results = dao.get_results()
 
         # then

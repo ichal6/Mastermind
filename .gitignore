@@ -6,5 +6,6 @@ pyvenv.cfg
 __pycache__/
 tests/test_score.txt
 test_score.txt
+test_score_wrong.txt
 src/winner.txt
 winner.txt
