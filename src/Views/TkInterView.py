@@ -57,6 +57,11 @@ class DisplayResultWindow(object):
 
         count = 1
         answers = []
+        if len(list_of_winners) == 0:
+            message = tk.Label(self.messages_area, width=55, background='#666565', text=logs.lang['no_results'])
+            message.grid(row=0, column=0, sticky=tk.EW)
+            return
+
         for winner in list_of_winners:
             text = f'{count}' + f'. Imie: {winner.get_name()}' \
                    + f'\tIlość prób: {winner.get_attempt()}' \

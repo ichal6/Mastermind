@@ -9,3 +9,4 @@ lang['manual'] = 'Aby zacząć grę wpisz 4 cyfrowy kod do pola. Dopuszczalne cy
                  'Uwaga! Gra może oszukiwać. Jesli jestes pewny, że komputer kłamie, naciśnij przycisk Oszust.'
 lang['result_label'] = 'Lista wyników:'
 lang['result_title'] = 'Wyniki'
+lang['no_results'] = 'Brak wyników. Zagraj jako pierwszy!'
