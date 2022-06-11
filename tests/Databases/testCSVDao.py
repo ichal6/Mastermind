@@ -9,6 +9,15 @@ class TestCSVDao(TestCase):
     def setUpClass(cls):
         cls.FILENAME = '../test_score.txt'
 
+    def test_0_should_return_empty_result_list(self):
+        # given
+        # when
+        dao = CSVDao(self.FILENAME)
+        results = dao.get_results()
+
+        # then
+        self.assertEqual(0, len(results))
+
     def test_1_should_return_create_new_entry(self):
         # given
         name = 'Mike'

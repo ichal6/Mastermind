@@ -1,4 +1,5 @@
 from datetime import datetime
+from os.path import exists
 
 from src.Databases.Dao import Dao
 from src.Models.Result import Result
@@ -14,6 +15,9 @@ class CSVDao(Dao):
 
     def get_results(self):
         results = []
+        file_exists = exists(self.file_with_score)
+        if not file_exists:
+            return results
         with open(self.file_with_score) as f:
             lines = f.readlines()
         for line in lines:
