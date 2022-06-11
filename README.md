@@ -28,3 +28,14 @@ Aby uruchomić testy:
 ```shell
 python -m unittest discover
 ```
+
+## UML
+Polecenie do generowania (włączyć z głównego katalogu):
+```shell
+pyreverse src -o pdf
+pyreverse src -o png
+```
+### Classes:
+![Classes](./UML/classes.png)
+### Packages:
+![Classes](./UML/packages.png)
