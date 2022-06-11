@@ -38,4 +38,4 @@ pyreverse src -o png
 ### Classes:
 ![Classes](./UML/classes.png)
 ### Packages:
-![Classes](./UML/packages.png)
+![Packages](./UML/packages.png)
