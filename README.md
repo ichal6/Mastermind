@@ -39,3 +39,8 @@ pyreverse src -o png
 ![Classes](./UML/classes.png)
 ### Packages:
 ![Packages](./UML/packages.png)
+
+## Status
+Projekt jest: *skończony*.
+
+Wszystkie założenia projektu zostały zrealizowane. Gra umożliwia stabilne działanie i nie wymaga poprawek.
